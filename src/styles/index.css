@@ -14,14 +14,14 @@
 }
 .body-link {
     text-decoration: none;
-    color: rgb(var(--gray-dark));
-    border: 2px solid rgb(var(--gray-dark));
+    color: var(--gray-dark);
+    border: 2px solid var(--gray-dark);
     border-radius: 10px;
     padding: 0px 4px;
 }
 .body-link:hover {
-    color: rgb(var(--gray-x-light));
-    background: rgb(var(--gray-dark));
+    color: var(--gray-x-light);
+    background: var(--gray-dark);
 }
 .body-link p {
     display: inline;
