@@ -1,0 +1,240 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { ui } from '@content/ui';
+---
+
+<header>
+	<nav class="pc-nav">
+		<div>
+			<h2>
+				<a href="/">{ui.nav.title}</a>
+			</h2>
+		</div>
+		<div class="pc-links">
+			<div class="header-item">
+				<HeaderLink href="/">{ui.nav.home}</HeaderLink>
+			</div>
+			<div class="header-folder">
+				<div class="folder-title">
+					<HeaderLink href={ui.links.subteams}>{ui.nav.subteams}</HeaderLink>
+					<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+						<path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/>
+					</svg>
+				</div>
+				<div class="folder-content">
+					<HeaderLink href={ui.links.subteam1}>{ui.nav.subteam1}</HeaderLink>
+				</div>
+			</div>
+            <div class="header-item">
+				<HeaderLink href={ui.links.portfolio}>{ui.nav.portfolio}</HeaderLink>
+            </div>
+            <div class="header-folder">
+				<div class="folder-title">
+					<HeaderLink href={ui.links.about}>{ui.nav.about}</HeaderLink>
+					<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+						<path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/>
+					</svg>
+				</div>
+				<div class="folder-content">
+					<HeaderLink href={ui.links.officers}>{ui.nav.officers}</HeaderLink>
+				</div>
+			</div>
+            <div class="header-item">
+                <HeaderLink href={ui.links.join}>{ui.nav.join}</HeaderLink>
+            </div>
+		</div>
+	</nav>
+	<nav class="mobile-nav">
+		<div class="upper-bar">
+			<h2><a href="/">{ui.nav.title}</a></h2>
+			<div id="hamburger-icon">
+				<div id="bar1"></div>
+				<div id="bar2"></div>
+				<div id="bar3"></div>
+			</div>
+		</div>
+		<div class="mobile-links">
+			<HeaderLink href="/">{ui.nav.home}</HeaderLink>
+			<HeaderLink href={ui.links.subteams}>{ui.nav.subteams}</HeaderLink>
+            <HeaderLink href={ui.links.subteam1} class="sublink">{ui.nav.subteam1}</HeaderLink>
+			<HeaderLink href={ui.links.about}>{ui.nav.about}</HeaderLink>
+            <HeaderLink href={ui.links.officers} class="sublink">{ui.nav.officers}</HeaderLink>
+			<HeaderLink href={ui.links.portfolio}>{ui.nav.portfolio}</HeaderLink>
+			<HeaderLink href={ui.links.join}>{ui.nav.join}</HeaderLink>		
+		</div>
+	</nav>
+</header>
+
+<style>
+	/* pc menu css */
+    header {
+		margin: 0;
+		background: white;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	}
+	h2 {
+		margin: 0;
+		font-size: 1em;
+	}
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+		color: var(--black);
+	}
+	.pc-nav {
+		padding: 0 1em;
+	}
+	.pc-nav, .upper-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.pc-nav a {
+		padding: 1em 0.5em;
+		color: var(--black);
+		text-decoration: none;
+	}
+	.folder-title a {
+		padding-right: 0;
+	}
+	.pc-links{
+		display: flex;
+		gap: 10px;
+	}
+	.header-item .active, .folder-title:has(.active) {
+		text-decoration: none;
+		border-bottom: 4px solid var(--accent);
+	}
+	.folder-content {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		background: white;
+		border-radius: 0 0 4px 4px;
+		left: -0.5rem;
+		z-index: 1;
+		transition: all 0.2s ease-in-out;
+        transform: translateY(-8px);
+		margin-top: -1rem;
+	}
+	.folder-content a {
+		padding: 0 1rem;
+		position: relative;
+	}
+	.header-folder {
+		position: relative;
+	}
+	.header-folder:hover .folder-content, .header-folder.open .folder-content{
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0px);
+	}
+	.header-folder:hover .dropdown-arrow {
+		color: var(--accent);
+	}
+	.dropdown-arrow {
+		height: 1rem;
+		bottom: -2px;
+		position: relative;
+	}
+	@media (max-width: 720px) {
+		.pc-links {
+			font-size: 17px;
+		}
+	}
+
+	/* mobile menu css */
+	.mobile-nav.open {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: white;
+		overflow-y: auto;
+		box-sizing: border-box;
+		z-index: 1;
+		.mobile-links { 
+			display: block;
+			margin: 10px 0px;
+			a {
+				color: rgb(var(--gray-dark));
+				display: block;
+				margin: 8px 0px;
+			}
+            .sublink {
+                margin-left: 20px;
+            }
+		}
+		.mobile-language-picker {
+			display: block;
+			padding: 5px 0px;
+			border-top: 1px solid rgb(var(--gray-dark));
+			a {
+				border-top: none;
+			}
+			.alternate {
+				margin-left: 5%;
+				display: inline-block;
+			}
+		}
+	}
+	.mobile-links, .mobile-language-picker {
+		display: none;
+	}
+	.mobile-nav {
+		font-size: 22px;
+		padding: 0 1em;
+		.active {
+			text-decoration: none;
+		}
+	}
+	.open .upper-bar {
+		border-bottom: 1px solid rgb(var(--gray-dark));
+	}
+	body.no-scroll {
+		overflow: hidden;
+	}
+
+	/* mobile menu logic */
+	@media (min-width: 601px)  {
+		.mobile-nav {
+			display: none;
+		}
+	}
+	@media (max-width: 600px) {
+		.pc-nav {
+			display: none;
+		}
+	}
+
+	/* mobile menu icon */
+	#hamburger-icon {
+		margin: 12px 0;
+		div {
+			width: 35px;
+			height: 3px;
+			background-color: rgb(var(--gray-dark));
+			margin: 6px 0;
+			transition: 0.5s;
+		}
+	}
+	#hamburger-icon.open{
+		#bar1 {
+			transform: rotate(-45deg) translate(-6px, 6px);
+		}
+		#bar2 {
+			opacity: 0;
+		}
+		#bar3 {
+			transform: rotate(45deg) translate(-6px, -8px);
+		}
+	}
+</style>
+
+<script>
+  import { linkTriggerDropdownScript } from './dropdown';
+  linkTriggerDropdownScript('.header-folder', '.folder-title', '.folder-content');
+  import { mobileMenu } from './mobileMenu';
+  mobileMenu();
+</script>

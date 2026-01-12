@@ -1,0 +1,39 @@
+.row-block {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+    .row-block {
+        flex-direction: column;
+    }
+}
+.row-block div {
+    flex: 1;
+    align-content: center;
+}
+.body-link {
+    text-decoration: none;
+    color: rgb(var(--gray-dark));
+    border: 2px solid rgb(var(--gray-dark));
+    border-radius: 10px;
+    padding: 0px 4px;
+}
+.body-link:hover {
+    color: rgb(var(--gray-x-light));
+    background: rgb(var(--gray-dark));
+}
+.body-link p {
+    display: inline;
+}
+.right-arrow{
+    height: 1rem;
+    bottom: -2px;
+    position: relative;
+}
+.hero-image {
+    width: 100%;
+}
+.hero{
+    margin-bottom: 2rem;
+}

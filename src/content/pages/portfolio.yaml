@@ -1,0 +1,14 @@
+title: Past Projects
+blocks:
+  - type: text
+    content: |
+      yo whats up
+  - type: code
+    lang: js
+    content: |
+      const heroBlock = z.object({
+        type: z.literal('hero'),
+        title: z.string(),
+        subtitle: z.string().optional(),
+        image: z.string(),
+      })

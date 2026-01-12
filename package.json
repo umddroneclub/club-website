@@ -9,6 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.0"
+    "astro": "^5.16.6"
+  },
+  "devDependencies": {
+    "eslint-import-resolver-typescript": "^4.4.4"
   }
 }
