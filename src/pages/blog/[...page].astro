@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import { filterPosts } from '@components/utils';
+import type { PaginateFunction } from 'astro';
+import Paginator from '@components/Paginator.astro';
+import '@styles/blog_index.css';
+
+// custom elements and styles
+import PostCard from '@components/PostCard.astro';
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import PostSelector from '@components/PostSelector.astro';
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+    const allPosts = await getCollection('blog');
+    const displayedPosts = filterPosts(allPosts);
+    return paginate(displayedPosts, {
+        pageSize: 15,
+      });
+}
+
+const { page } = Astro.props as { page: any };
+---
+
+<!doctype html>
+<html lang='en'>
+	<head>
+		<BaseHead />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<PostSelector showCount={true}/>
+			<section>
+				<ul id="post-list">
+					{
+						page.data.map((post: any) => (
+							<PostCard post={post} />
+						))
+					}
+				</ul>
+			</section>
+			<Paginator prevURL={page.url.prev} nextURL={page.url.next}/>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script>
+    import { postFilter } from '@components/postFilter.ts';
+    postFilter();
+</script>

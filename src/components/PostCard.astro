@@ -1,0 +1,27 @@
+---
+import FormattedDate from '@components/FormattedDate.astro';
+
+export interface Props {
+  post: any,
+}
+
+const {post} = Astro.props;
+---
+<!-- all sortable by properties should be added here -->
+<li
+    data-date={post.data.pubDate}
+    data-rating={post.data.rating}
+    data-title={post.data.title.toLowerCase()}
+    data-tag={post.data.tag}
+>
+    <a href={`/blog/${post.id}/`}>
+        <img width={720} height={360} src={post.data.heroImage} alt="" />
+        <div class="title-container">
+            <h4 class="title">{post.data.title}</h4>
+            <p class="tag">{post.data.tag}</p>
+        </div>
+        <p class="date">
+            <FormattedDate date={post.data.pubDate} />
+        </p>
+    </a>
+</li>

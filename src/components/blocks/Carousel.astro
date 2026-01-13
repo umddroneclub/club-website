@@ -1,0 +1,62 @@
+---
+// Carousel.astro
+const { items } = Astro.props;
+---
+
+<div class="carousel-container">
+  <div class="carousel-track">
+    {items.map((item: any) => (
+      <div class="carousel-slide">
+        <img src={item.image} />
+      </div>
+    ))}
+  </div>
+
+  <div class="controls">
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+  </div>
+</div>
+
+<style>
+  /* Core functionality */
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* Enables mobile swipe snapping */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%; /* Each slide takes full width */
+    scroll-snap-align: start;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  /* Hide scrollbar for a cleaner look */
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  const track = document.querySelector('.carousel-track');
+  const prevBtn = document.querySelector('#prev');
+  const nextBtn = document.querySelector('#next');
+
+  if (track && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: track.clientWidth, behavior: 'smooth' });
+    });
+  }
+</script>

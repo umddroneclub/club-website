@@ -1,0 +1,135 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { filterPosts } from '@components/utils.ts';
+
+const allPosts = await getCollection('blog');
+const displayedPosts = filterPosts(allPosts);
+const allTags = displayedPosts.map((tag: any) => tag.data.tag).flat();
+const processedTags = allTags.reduce((acc: { [key: string]: number }, tag) => {
+    //check if tag exists
+    const value = acc[tag] || 0;
+    return {
+        ...acc,
+        [tag]: value + 1
+    }
+}, {})
+
+const { showCount } = Astro.props;
+---
+
+<span class="all-selectors">
+    <div>
+        <input type="search" id="search" placeholder='Search' />
+    </div>
+    <div>
+        <span class="selector-wrapper">
+            <p class="selector-title">Sort by:</p>
+            <div class="selector" data-name="sorting-selector" tabindex="0">
+                <div class="selector-button">
+                    <p>Newest</p>
+                    <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+						<path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/>
+					</svg>
+                </div>
+                <ul class="selector-content">
+                    <li class="hidden" data-value="new">Newest</li>
+                    <li class="" data-value="old">Oldest</li>
+                </ul>
+                <input type="hidden" class="selector-hidden" id="sort" value="new"/>
+            </div>
+        </span>
+    </div>
+    <div>
+        <span class="selector-wrapper">
+            <p class="selector-title">Filter by:</p>
+            <div class="selector" data-name="category-selector" tabindex="0">
+                <div class="selector-button">
+                    <p>Select Tag</p>
+                    <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+						<path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/>
+					</svg>
+                </div>
+                <ul class="selector-content">
+                    <li class="hidden" data-value="no-tag">No Filter</li>
+                    {
+                        Object.entries(processedTags).map(([key, val]) => (
+                            <li data-value={key}>{key}{showCount ? ` (${val})` : ''}</li>
+                        ))
+                    }
+                </ul>
+                <input type="hidden" class="selector-hidden" id="tag" value="no-tag"/>
+            </div>
+        </span>
+    </div>
+</span>
+<style>
+    .selector-title {
+        display: inline-block;
+    }
+    .selector-button {
+        display: inline-flex;
+    }
+    .all-selectors {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    .all-selectors div {
+        vertical-align: top;
+    }
+    .selector {
+        display: inline-block;
+        position: relative;
+    }
+    .selector-content{
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        z-index: 100;
+        background: var(--gray-x-light);
+        gap: 0;
+        transition: all 0.2s ease-in-out;
+        transform: translateY(-8px);
+		padding: 0 10px 0;
+		border-radius: 0 0 4px 4px;
+        left: -10px;
+        box-shadow: 0 2px 8px rgba(from var(--black) r g b / 0.05);
+        li {
+            width: max-content;
+            text-align: left;
+            margin-bottom: 0.1rem;
+        }
+    }
+    .dropdown-arrow {
+		height: 1rem;
+		bottom: -8px;
+		position: relative;
+	}
+    .open .selector-content, .selector:hover .selector-content{
+        opacity: 100;
+        visibility: visible;
+        transform: translateY(0px);
+    }
+    p{
+        margin: 0;
+    }
+    input {
+        height: 2rem;
+        background-color: var(--gray-x-light);
+        border-radius: 8px;
+        border: 2px solid var(--gray);
+    }
+    .hidden {
+        display: none;
+    }
+    @media (max-width:600px) {
+        .all-selectors {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    import { selectorDropdownScript } from '@components/dropdown.ts';
+    selectorDropdownScript('.selector', '.selector-button', '.selector-content li', '.selector-hidden');
+</script>

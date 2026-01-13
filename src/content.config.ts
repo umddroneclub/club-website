@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders"
+import { glob, file } from "astro/loaders"
 
 const textBlock = z.object({
     type: z.literal('text'),
@@ -11,6 +11,8 @@ const heroBlock = z.object({
     title: z.string(),
     subtitle: z.string().optional(),
     image: z.string(),
+    align: z.enum(['left', 'center', 'right']).optional(),
+
 })
 
 const carouselBlock = z.object({
@@ -60,7 +62,7 @@ const pagesCollection = defineCollection({
     loader: glob({ 
         base: './src/content/pages', 
         pattern: '**/*.yaml',
-        // Force the ID to be the filename regardless of content
+        // Forces the ID to be the filename regardless of content
         generateId: ({ entry }) => entry.replace(/\.[^/.]+$/, ''),
     }),
     schema: z.object({
@@ -70,6 +72,45 @@ const pagesCollection = defineCollection({
     })
 });
 
+const navItem = z.object({
+    label: z.string(),
+    href: z.string(),
+    children: z.array(z.object({
+        label: z.string(),
+        href: z.string(),
+    })).optional(),
+});
+
+const uiCollection = defineCollection({
+    loader: glob({
+        base: './src/content',
+        pattern: 'global.yaml',
+        generateId: ({ entry }) => entry.replace(/\.[^/.]+$/, ''),
+    }),
+    schema: z.object({
+        nav: z.array(navItem),
+        global: z.record(z.string()),
+        contact: z.record(z.string()),
+    })
+});
+
+const blogCollection = defineCollection({
+    loader: glob({ 
+        base: './src/content/blog', 
+        pattern: '*.{md,mdx}' }),
+    schema: z.object({
+        title: z.string(),
+        // Transform string to Date object
+        pubDate: z.coerce.date(),
+        updatedDate: z.coerce.date().optional(),
+        heroImage: z.string().optional(),
+        tag: z.string(),
+        draft: z.boolean(),
+    }),
+});
+
 export const collections = {
   pages: pagesCollection,
+  ui: uiCollection,
+  blog: blogCollection,
 };

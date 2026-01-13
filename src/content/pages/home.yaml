@@ -1,4 +1,11 @@
 title: Welcome
 blocks: 
+  - type: hero
+    title: UMD Drone Club
+    image: /img/base/mckeldin.jpg
+    align: left
   - type: text
-    content: "Welcome to the Drone Club! We are excited to have you here."
+    content: |
+      Welcome to the UMD Drone Club!
+
+      We are a 

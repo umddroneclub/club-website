@@ -1,0 +1,28 @@
+nav:
+  - label: "Subteams"
+    href: "/subteams"
+    children:
+      - label: "FPV"
+        href: "/subteams/fpv"
+  - label: "Portfolio"
+    href: "/portfolio"
+  - label: "About"
+    href: "/about"
+    children:
+      - label: "Officers"
+        href: "/about/officers"
+  - label: "Join Us"
+    href: "/join"
+  - label: "Blog"
+    href: "/blog"
+global:
+  site_title: "Drone Club at UMD"
+  site_description: "Drone Club at the University of Maryland"
+  title: "Drone Club"
+  license_holder: "Mikhail Labar"
+contact:
+  instagram: "https://www.instagram.com/umd.drone.club/"
+  discord: "https://discord.gg/WhT9n7Zy6j"
+  email: "mailto:umd.drone.club@gmail.com"
+  github: "https://github.com/umddroneclub"
+  terplink: ""

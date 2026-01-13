@@ -1,52 +1,49 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { ui } from '@content/ui';
+import { getEntry } from 'astro:content'
+const entry = await getEntry("ui", "global");
+
+if (!entry) {
+  return Astro.redirect('/404');
+}
+
+const { nav, global } = entry.data;
 ---
 
 <header>
 	<nav class="pc-nav">
-		<div>
-			<h2>
-				<a href="/">{ui.nav.title}</a>
-			</h2>
-		</div>
+		<a id="logo-container" href="./">
+			<img src="/img/icons/drone_logo.png" />
+			<h2>{global.title}</h2>
+		</a>
 		<div class="pc-links">
-			<div class="header-item">
-				<HeaderLink href="/">{ui.nav.home}</HeaderLink>
-			</div>
-			<div class="header-folder">
-				<div class="folder-title">
-					<HeaderLink href={ui.links.subteams}>{ui.nav.subteams}</HeaderLink>
-					<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
-						<path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/>
-					</svg>
+			{nav.map((item: any) => (
+				<div class={item.children ? "header-folder" : "header-item"}>
+					{item.children ? (
+						<div class="folder-title">
+							<HeaderLink href={item.href}>{item.label}</HeaderLink>
+							<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+								<path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/>
+							</svg>
+						</div>
+						<div class="folder-content">
+							{item.children.map((child: any) => (
+								<HeaderLink href={child.href}>{child.label}</HeaderLink>
+							))}
+						</div>
+					) : (
+						<HeaderLink href={item.href}>{item.label}</HeaderLink>
+					)}
 				</div>
-				<div class="folder-content">
-					<HeaderLink href={ui.links.subteam1}>{ui.nav.subteam1}</HeaderLink>
-				</div>
-			</div>
-            <div class="header-item">
-				<HeaderLink href={ui.links.portfolio}>{ui.nav.portfolio}</HeaderLink>
-            </div>
-            <div class="header-folder">
-				<div class="folder-title">
-					<HeaderLink href={ui.links.about}>{ui.nav.about}</HeaderLink>
-					<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
-						<path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/>
-					</svg>
-				</div>
-				<div class="folder-content">
-					<HeaderLink href={ui.links.officers}>{ui.nav.officers}</HeaderLink>
-				</div>
-			</div>
-            <div class="header-item">
-                <HeaderLink href={ui.links.join}>{ui.nav.join}</HeaderLink>
-            </div>
+			))}
 		</div>
 	</nav>
 	<nav class="mobile-nav">
 		<div class="upper-bar">
-			<h2><a href="/">{ui.nav.title}</a></h2>
+			<a id="logo-container" href="./">
+				<img src="/img/icons/drone_logo.png" />
+				<h2>{global.title}</h2>
+			</a>
 			<div id="hamburger-icon">
 				<div id="bar1"></div>
 				<div id="bar2"></div>
@@ -54,13 +51,14 @@ import { ui } from '@content/ui';
 			</div>
 		</div>
 		<div class="mobile-links">
-			<HeaderLink href="/">{ui.nav.home}</HeaderLink>
-			<HeaderLink href={ui.links.subteams}>{ui.nav.subteams}</HeaderLink>
-            <HeaderLink href={ui.links.subteam1} class="sublink">{ui.nav.subteam1}</HeaderLink>
-			<HeaderLink href={ui.links.about}>{ui.nav.about}</HeaderLink>
-            <HeaderLink href={ui.links.officers} class="sublink">{ui.nav.officers}</HeaderLink>
-			<HeaderLink href={ui.links.portfolio}>{ui.nav.portfolio}</HeaderLink>
-			<HeaderLink href={ui.links.join}>{ui.nav.join}</HeaderLink>		
+			{nav.map((item: any) => (
+				<>
+				<HeaderLink href={item.href}>{item.label}</HeaderLink>
+				{item.children && item.children.map((child: any) => (
+					<HeaderLink class="sublink" href={child.href}>{child.label}</HeaderLink>
+				))}
+				</>
+			))}
 		</div>
 	</nav>
 </header>
@@ -70,11 +68,21 @@ import { ui } from '@content/ui';
     header {
 		margin: 0;
 		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		box-shadow: 0 2px 8px rgba(from var(--black) r g b / 0.05);
+		font-family: 'Quantico', 'serif';
+	}
+	img {
+		height: 50px;
+	}
+	#logo-container {
+		display: flex;
+		padding: 0rem 0.5rem;
 	}
 	h2 {
-		margin: 0;
-		font-size: 1em;
+		margin: 0 0 0 15px;
+		font-size: 1.2em;
+		align-self: center;
+		font-family: 'Quantico', 'serif';
 	}
 	h2 a,
 	h2 a.active {
@@ -96,6 +104,9 @@ import { ui } from '@content/ui';
 	}
 	.folder-title a {
 		padding-right: 0;
+	}
+	.folder-title {
+		white-space: nowrap;
 	}
 	.pc-links{
 		display: flex;
@@ -157,6 +168,7 @@ import { ui } from '@content/ui';
 		.mobile-links { 
 			display: block;
 			margin: 10px 0px;
+			padding: 0 0 0 1em;
 			a {
 				color: var(--gray-dark);
 				display: block;
@@ -166,25 +178,16 @@ import { ui } from '@content/ui';
                 margin-left: 20px;
             }
 		}
-		.mobile-language-picker {
-			display: block;
-			padding: 5px 0px;
-			border-top: 1px solid var(--gray-dark);
-			a {
-				border-top: none;
-			}
-			.alternate {
-				margin-left: 5%;
-				display: inline-block;
-			}
-		}
 	}
-	.mobile-links, .mobile-language-picker {
+	.mobile-links {
 		display: none;
 	}
 	.mobile-nav {
 		font-size: 22px;
-		padding: 0 1em;
+		padding: 0 1em 0 0;
+		a {
+			text-decoration: none;
+		}
 		.active {
 			text-decoration: none;
 		}
@@ -214,7 +217,7 @@ import { ui } from '@content/ui';
 		div {
 			width: 35px;
 			height: 3px;
-			background-color: var(--gray-dark));
+			background-color: var(--gray-dark);
 			margin: 6px 0;
 			transition: 0.5s;
 		}

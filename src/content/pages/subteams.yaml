@@ -1,0 +1,12 @@
+title: Subteams
+blocks:
+  - type: text
+    content: |
+      Drone Club is made up of individual subteams which each focus on a particular aspect of autonomous vehicles.
+      You can learn more about each individual subteam and its mission down below.
+  - type: cards
+    items:
+      - image: ""
+        title: ""
+        caption: ""
+        link: ""

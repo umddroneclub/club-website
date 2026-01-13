@@ -1,5 +1,10 @@
 ---
+import { marked } from "marked";
 const { content } = Astro.props;
+
+const htmlContent = marked.parse(content);
 ---
 
-<p>{content}</p>
+<section>
+    <p set:html={htmlContent} />
+</section>
