@@ -62,8 +62,13 @@ const pagesCollection = defineCollection({
     loader: glob({ 
         base: './src/content/pages', 
         pattern: '**/*.yaml',
-        // Forces the ID to be the filename regardless of content
-        generateId: ({ entry }) => entry.replace(/\.[^/.]+$/, ''),
+        // Use only the filename (no directories) as the ID so nested pages
+        // like `subteams/fpv.yaml` become `fpv` and match `getEntry("pages", "fpv")`.
+        generateId: ({ entry }) => {
+            const parts = entry.split(/[/\\]/);
+            const filename = parts[parts.length - 1] ?? entry;
+            return filename.replace(/\.[^/.]+$/, '');
+        },
     }),
     schema: z.object({
         title: z.string(),

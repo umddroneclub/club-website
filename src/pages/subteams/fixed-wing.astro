@@ -21,7 +21,7 @@ const Blocks = {
 	cards: Cards,
 } as any;
 
-const entry = await getEntry("pages", "fpv");
+const entry = await getEntry("pages", "fixed-wing");
 
 if (!entry) {
   return Astro.redirect('/404');

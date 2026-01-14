@@ -1,31 +1,34 @@
-# Astro Starter Kit: Minimal
+# Basic Structure
 
-```sh
-npm create astro@latest -- --template minimal
-```
+This is an Astro project built on a block structure. 
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Feel free to clone and use this website for your own purposes, but if you only make minor changes, please link back to this original.
 
-## 🚀 Project Structure
+## Blog posts
 
-Inside of your Astro project, you'll see the following folders and files:
+To make a new blog post or edit an existing one, just add/edit its relevant `.md` or `.mdx` file in `/src/content/blog`. Markdown syntax can be found [here](https://www.markdownguide.org/basic-syntax/).
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## How to edit existing files
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Page information and data are stored as YAML files in the `/src/content/pages` directory, and are automatically turned into HTML files when the project is built.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+In order to edit existing pages, find its corresponding YAML file, for example `home.yaml`, and edit the text or rearrange the blocks.
 
-Any static assets, like images, can be placed in the `public/` directory.
+Global variables such as the site title and navigation menu are stored in `global.yaml`.
 
-## 🧞 Commands
+Any static assets, like images, are placed in the `public/` directory and refernced by filename. If you wish to replace a file, make sure its name is identical.
+
+## How to add new features
+
+To create new pages, start by adding a new YAML file in the `/src/content/pages` directory. Please arrange the files logically, for example placing subteam page files in the `/src/content/pages/subteams` directory.
+
+All existing blocks are stored in `/src/components/blocks`. To edit their styling or structure, edit those files. To add a new block, place a new Astro file in that directory.
+
+The fields required by each block can be found in their related schemas in `/src/content.config.ts`. When you add a new block, add its schema to that file and add the schema to the `blockSchema discriminatedUnion` function. try to be specific with what each field tolerates to avoid a compile error.
+
+Always build the project locally and test before pushing to Github.
+
+## Testing
 
 All commands are run from the root of the project, from a terminal:
 
@@ -40,4 +43,4 @@ All commands are run from the root of the project, from a terminal:
 
 ## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Feel free to check [Astro documentation](https://docs.astro.build).

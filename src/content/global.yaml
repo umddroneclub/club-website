@@ -4,6 +4,8 @@ nav:
     children:
       - label: "FPV"
         href: "/subteams/fpv"
+      - label: "Fixed Wing"
+        href: "/subteams/fixed-wing"
   - label: "Portfolio"
     href: "/portfolio"
   - label: "About"
