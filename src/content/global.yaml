@@ -11,8 +11,6 @@ nav:
   - label: "About"
     href: "/about"
     children:
-      - label: "Officers"
-        href: "/about/officers"
   - label: "Join Us"
     href: "/join"
   - label: "Blog"
@@ -24,7 +22,7 @@ global:
   license_holder: "Mikhail Labar"
 contact:
   instagram: "https://www.instagram.com/umd.drone.club/"
-  discord: "https://discord.gg/WhT9n7Zy6j"
+  discord: "https://discord.gg/VPYw2ujH"
   email: "mailto:umd.drone.club@gmail.com"
   github: "https://github.com/umddroneclub"
-  terplink: ""
+  terplink: "https://terplink.umd.edu/organization/drone-club/"

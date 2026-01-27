@@ -1,4 +1,4 @@
-# Basic Structure
+## Basic Structure
 
 This is an Astro project built on a block structure. 
 
@@ -16,7 +16,7 @@ In order to edit existing pages, find its corresponding YAML file, for example `
 
 Global variables such as the site title and navigation menu are stored in `global.yaml`.
 
-Any static assets, like images, are placed in the `public/` directory and refernced by filename. If you wish to replace a file, make sure its name is identical.
+Any static assets, like images, are placed in the `public/` directory and referenced by filename. If you wish to replace a file, make sure its name is identical.
 
 ## How to add new features
 
@@ -41,6 +41,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## Questions about Astro?
 
 Feel free to check [Astro documentation](https://docs.astro.build).

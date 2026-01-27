@@ -7,4 +7,21 @@ blocks:
       That includes aerial, aquatic, and ground vehicles.
 
       We operate on a decentralized subteam structure, where indivdual projects are planned and executed by smaller focus subteams, and the club as a whole exists to do advertising, find funding, and manage university relations.
-
+  - type: cards
+    items:
+      - image: /img/headshots/president.jpg
+        title: President 
+        link: /
+        subtitle: |
+          Mikhail Labar
+          Junior, Mechanical Engineering, Business Management
+      - image: /img/headshots/vice-president.png
+        title: Vice President
+        subtitle: |
+           Lorem Impsum
+      - image: /img/headshots
+        title: Treasurer
+        link: /
+        subtitle: |
+          Elijah Singleton
+          Junior,
