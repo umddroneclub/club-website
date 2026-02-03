@@ -5,10 +5,11 @@ type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
 const pathname = Astro.url.pathname;
-const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+const isInert = !href;
+const isActive = href && (href === pathname || href === pathname.replace(/\/$/, ''));
 ---
 
-<a {...(!isActive ? { href } : {})} class:list={['header-link', className, { active: isActive }]} {...props}>
+<a {...(!isActive ? { href } : {})} class:list={['header-link', className, { active: isActive, unclickable: isInert}]} {...props}>
 	<slot />
 </a>
 <style>
@@ -24,5 +25,9 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 	a.active {
 		font-weight: bolder;
 		text-decoration: underline;
+	}
+	a.unclickable {
+		pointer-events: none;
+		cursor: default:
 	}
 </style>

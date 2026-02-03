@@ -1,0 +1,49 @@
+---
+import { getEntry } from "astro:content";
+
+import BaseHead from '@components/BaseHead.astro'
+import Header from "@components/Header.astro"
+import Footer from "@components/Footer.astro"
+
+import Hero from "@components/blocks/Hero.astro";
+import Text from "@components/blocks/Text.astro";
+import Quote from "@components/blocks/Quote.astro";
+import Carousel from "@components/blocks/Carousel.astro";
+import CodeBlock from "@components/blocks/CodeBlock.astro";
+import Cards from "@components/blocks/Cards.astro";
+
+const Blocks = {
+  	hero: Hero,
+  	text: Text,
+  	quote: Quote,
+	carousel: Carousel,
+	code: CodeBlock,
+	cards: Cards,
+} as any;
+
+const entry = await getEntry("pages", "technology");
+
+if (!entry) {
+  return Astro.redirect('/404');
+}
+
+const { blocks } = entry.data;
+---
+
+<html lang="en">
+	<head>
+        <BaseHead />
+    </head>
+	<body>
+		<Header />
+		<main>
+			<article>
+				{blocks.map((block: any)=> {
+					const Component = Blocks[block.type];
+					return Component ? <Component {...block} /> : null;
+				})}
+			</article>
+		</main>
+		<Footer />
+	</body>	
+</html>

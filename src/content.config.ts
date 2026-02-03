@@ -42,9 +42,14 @@ const cardsBlock = z.object({
     items: z.array(
         z.object({
             image: z.string(),
-            title: z.string(),
-            subtitle: z.string().optional(),
             link: z.string().optional(),
+            visible: z.object({
+                title: z.string().optional(),
+            }).optional(),
+            on_hover: z.object({
+                title: z.string(),
+                subtitle: z.string().optional(),
+            }).optional()
         })
     ).min(1),
 })

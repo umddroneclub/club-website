@@ -7,10 +7,13 @@ const { items } = Astro.props;
         <div class="card">
             <a href={item.link}>
                 <img src={item.image} />
+                <div class="visible-overlay">
+                    <h3>{item.visible?.title}</h3>
+                </div>
 
                 <div class="overlay">
-                    <h3>{item.title}</h3>
-                    <p class="details">{item.subtitle}</p>
+                    <h3>{item.on_hover?.title}</h3>
+                    <p class="details">{item.on_hover?.subtitle}</p>
                 </div>
             </a>
         </div>
@@ -69,5 +72,30 @@ const { items } = Astro.props;
     .details {
         color: var(--gray-x-light);
         margin: 0 1rem;
+        white-space: pre-wrap;
     }
+
+    .visible-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: end;
+        text-align: center;
+
+        opacity: 1;
+        transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    .card:hover .visible-overlay {
+        opacity: 0;
+    }
+
+    .visible-overlay h3 {
+        color: var(--gray-x-light);
+        -webkit-text-stroke: 0.1px var(--gray-dark);
+        margin: 0 1rem;
+    }
+
 </style>

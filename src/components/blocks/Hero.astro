@@ -2,7 +2,7 @@
 const { title, image, align } = Astro.props;
 ---
 
-<section class="hero full-bleed">
+<section class="hero">
     <img src={image} alt={title} class="hero-img" />
 
     <div class="hero-content">
@@ -24,6 +24,7 @@ const { title, image, align } = Astro.props;
         right: 50%;
         margin-left: -50vw;
         margin-right: -50vw;
+        z-index: -1;
     }
 
     .hero-img {

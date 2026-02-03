@@ -2,22 +2,25 @@ title: Join Us
 blocks:
   - type: text
     content: |
-      If you are interested in learning more about Drone Club or any of its subteams, please feel free to learn more from the sources linked below.
+      #### If you are interested in Drone Club or any of its subteams, please join us at one of the sources linked below.
 
       Discord is our main form of communication. All meeting and event info is posted there, and it is the best place to ask us questions.
 
-      Terplink is the offical university portal for the club and is where you can become a member. 
-      We rely on TerpLink member numbers to apply for SGA funding, so make sure to apply once you become a member.
-
       Instagram is our secondary form of communication, but we also try to post all our event dates there as we can.
+
+      Terplink is the offical university portal for the club and is where you can become a member. 
+      We rely on TerpLink member numbers when applying for SGA funding, so make sure to join us on Terplink as well.
   - type: cards
     items:
       - image: "/img/icons/discord.png"
-        title: "Discord"
         link: "https://discord.gg/VPYw2ujH"
+        on_hover:
+          title: "Discord"
       - image: "/img/icons/instagram.png"
-        title: "Instagram"
         link: "https://www.instagram.com/umd.drone.club/"
+        on_hover:
+          title: "Instagram"
       - image: "/img/icons/terplink.png"
-        title: "Terplink"
         link: "https://terplink.umd.edu/organization/drone-club/"
+        on_hover: 
+          title: "Terplink"

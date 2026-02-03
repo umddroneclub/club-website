@@ -1,20 +1,17 @@
 nav:
   - label: "Subteams"
-    href: "/subteams"
+    href: ""
     children:
       - label: "FPV"
         href: "/subteams/fpv"
       - label: "Fixed Wing"
         href: "/subteams/fixed-wing"
-  - label: "Portfolio"
-    href: "/portfolio"
+      - label: "Technology"
+        href: "/subteams/technology"
   - label: "About"
     href: "/about"
-    children:
   - label: "Join Us"
     href: "/join"
-  - label: "Blog"
-    href: "/blog"
 global:
   site_title: "Drone Club at UMD"
   site_description: "Drone Club at the University of Maryland"
