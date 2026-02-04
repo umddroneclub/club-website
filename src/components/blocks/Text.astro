@@ -8,3 +8,9 @@ const htmlContent = marked.parse(content);
 <section>
     <p set:html={htmlContent} />
 </section>
+
+<style>
+    section > :global(p){
+        /* text-indent: 2rem; */
+    }
+</style>

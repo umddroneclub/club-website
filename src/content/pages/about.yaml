@@ -2,7 +2,7 @@ title: About
 blocks: 
   - type: text
     content: |
-      Drone Club is a student-led organization at the University of Maryland dedicated to the science and operation of unmanned vehicles.
+      #### Drone Club is a student-led organization at the University of Maryland dedicated to the science and operation of unmanned vehicles.
 
       That includes aerial, aquatic, and ground vehicles.
 
@@ -32,4 +32,4 @@ blocks:
           title: Treasurer
           subtitle: |
             Elijah Singleton
-            Junior,
+            Junior, Engineering
