@@ -13,7 +13,7 @@ blocks:
   - type: cards
     items:
       - image: "/img/icons/discord.png"
-        link: "https://discord.gg/VPYw2ujH"
+        link: "https://discord.gg/RaAn2b7e"
         on_hover:
           title: "Discord"
       - image: "/img/icons/instagram.png"
